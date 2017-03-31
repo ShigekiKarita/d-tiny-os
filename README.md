@@ -1,5 +1,14 @@
 (WIP) tiny 32-bit OS in D and GAS
 
+## requirements
+
++ LDC
++ GCC
++ QEMU
+
+```
+make run
+```
 
 ## ref
 
