@@ -24,13 +24,13 @@ $(IMG) : $(OSSYS) $(IPL)
 $(BIN)/boot.o: $(DSRC)/boot.d
 	$(DC) $(DOPT) -c $(DSRC)/*.d -of=$(BIN)/boot.o
 
-$(BIN)/boot.bin: $(ASRC)/head.s
+$(BIN)/head.bin: $(ASRC)/head.s
 	$(CC) $(ASRC)/head.s -nostdlib -T$(LS)/head.ld -o $(BIN)/head.bin
 
 $(BIN)/func.o: $(ASRC)/func.s
 	$(AS) $(ASRC)/func.s -o $(BIN)/func.o
 
-$(OSSYS) : $(BIN)/boot.bin $(BIN)/func.o $(BIN)/boot.o
+$(OSSYS) : $(BIN)/head.bin $(BIN)/func.o $(BIN)/boot.o
 	$(LD) -o $(BIN)/boot.bin -e Main $(BIN)/boot.o $(BIN)/func.o
 	cat $(BIN)/head.bin $(BIN)/boot.bin > $(OSSYS)
 
